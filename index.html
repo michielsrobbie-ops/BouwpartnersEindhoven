@@ -11,7 +11,7 @@
 <meta name="theme-color" content="#ffffff">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "HomeAndConstructionBusiness", "name": "Bouwpartners Eindhoven", "legalName": "Bouwpartners Eindhoven B.V.", "url": "https://bouwpartnerseindhoven.nl/", "logo": "https://bouwpartnerseindhoven.nl/assets/logo/logo.png", "telephone": "+31645072792", "email": "bouwpartnerseindhoven@gmail.com", "address": {"@type": "PostalAddress", "streetAddress": "Haakske 5", "postalCode": "5721 RC", "addressLocality": "Asten", "addressCountry": "NL"}, "areaServed": {"@type": "City", "name": "Eindhoven"}, "identifier": {"@type": "PropertyValue", "propertyID": "KvK", "value": "98387561"}, "knowsAbout": ["Dakwerken", "Dakisolatie", "Zolder isoleren en afwerken", "Tuinaanleg", "Tuinrenovatie", "Bomen kappen en verwijderen", "Overkappingen en aanbouwtjes"]}</script>
 <link rel="icon" href="assets/logo/favicon.png">
-<link rel="stylesheet" href="css/site.css?v=5">
+<link rel="stylesheet" href="css/site.css?v=6">
 </head>
 <body>
 <a href="#inhoud" class="sr-only focus:not-sr-only focus:absolute focus:left-6 focus:top-6 focus:z-50 focus:rounded-xl focus:bg-ink focus:px-5 focus:py-3 focus:text-white">Naar inhoud</a>
@@ -295,7 +295,10 @@
         </div>
       </dl>
     </div>
-    <form id="project-form" class="kaart p-8 shadow-lift md:col-span-7 lg:p-12">
+    <form id="project-form" action="https://formsubmit.co/bouwpartnerseindhoven@gmail.com" method="POST" class="kaart p-8 shadow-lift md:col-span-7 lg:p-12">
+      <input type="hidden" name="_subject" value="Nieuwe projectaanvraag via de website">
+      <input type="hidden" name="_template" value="table">
+      <input type="text" name="_honey" tabindex="-1" autocomplete="off" hidden>
       <div class="grid gap-6 sm:grid-cols-2">
         <div><label for="naam" class="label block">Je naam</label>
           <input id="naam" name="naam" autocomplete="name" required placeholder="Voor- en achternaam" class="veld mt-3"></div>
@@ -307,12 +310,11 @@
       <div class="mt-6"><label for="bericht" class="label block">Vertel kort over je project</label>
         <textarea id="bericht" name="bericht" rows="5" required placeholder="Wat wil je veranderen aan je huis of tuin?" class="veld mt-3 resize-y"></textarea></div>
       <div class="mt-8 flex flex-wrap items-center gap-3">
-        <button type="submit" class="btn btn-ink">Maak je e-mail klaar <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        <button type="button" id="copy" class="btn btn-stil">Tekst kopiëren</button>
+        <button type="submit" class="btn btn-ink">Verstuur je aanvraag <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
       </div>
       <p id="form-status" role="status" class="mt-5 text-[0.9375rem] text-merk-ink"></p>
       <p class="mt-6 border-t border-line-soft pt-6 text-[0.875rem] leading-relaxed text-ink-faint">
-        Dit formulier opent je eigen e-mailprogramma; je verstuurt de e-mail daar zelf. We gebruiken je gegevens alleen om op je aanvraag te reageren.
+        Je aanvraag komt direct bij ons binnen. We gebruiken je gegevens alleen om op je aanvraag te reageren.
         Zie ons <a href="privacybeleid.html" class="text-ink-soft underline decoration-line underline-offset-4 transition-colors hover:text-merk-ink">privacybeleid</a>.</p>
     </form>
   </div>
@@ -353,6 +355,6 @@
     </div>
   </div>
 </footer>
-<script src="js/site.js?v=5" defer></script>
+<script src="js/site.js?v=6" defer></script>
 </body>
 </html>

@@ -26,3 +26,4 @@ Hoog na een wijziging in CSS of JS het nummer `V` in build.py op, anders zien be
 - Btw-nummer voor de footer.
 - Bevestiging van de bewaartermijn in het privacybeleid (nu een jaar).
 - Foto's van afgeronde daken; de dakfoto's tonen nu alleen werk in uitvoering.
+- FormSubmit activeren: na de eerste inzending komt er een activatiemail op bouwpartnerseindhoven@gmail.com; daarin op "Activate Form" klikken.

@@ -10,7 +10,7 @@ exec(open(Path(__file__).resolve().parent / "_data.py", encoding="utf-8").read()
 
 ROOT = Path(__file__).resolve().parent
 OUT = ROOT / "site"
-V = "5"
+V = "6"
 
 TEL, TEL_LINK = "06 45072792", "+31645072792"
 MAIL = "bouwpartnerseindhoven@gmail.com"
@@ -203,7 +203,10 @@ def formulier():
         </div>
       </dl>
     </div>
-    <form id="project-form" class="kaart p-8 shadow-lift md:col-span-7 lg:p-12">
+    <form id="project-form" action="https://formsubmit.co/{MAIL}" method="POST" class="kaart p-8 shadow-lift md:col-span-7 lg:p-12">
+      <input type="hidden" name="_subject" value="Nieuwe projectaanvraag via de website">
+      <input type="hidden" name="_template" value="table">
+      <input type="text" name="_honey" tabindex="-1" autocomplete="off" hidden>
       <div class="grid gap-6 sm:grid-cols-2">
         <div><label for="naam" class="label block">Je naam</label>
           <input id="naam" name="naam" autocomplete="name" required placeholder="Voor- en achternaam" class="veld mt-3"></div>
@@ -215,12 +218,11 @@ def formulier():
       <div class="mt-6"><label for="bericht" class="label block">Vertel kort over je project</label>
         <textarea id="bericht" name="bericht" rows="5" required placeholder="Wat wil je veranderen aan je huis of tuin?" class="veld mt-3 resize-y"></textarea></div>
       <div class="mt-8 flex flex-wrap items-center gap-3">
-        <button type="submit" class="btn btn-ink">Maak je e-mail klaar {PIJL}</button>
-        <button type="button" id="copy" class="btn btn-stil">Tekst kopiëren</button>
+        <button type="submit" class="btn btn-ink">Verstuur je aanvraag {PIJL}</button>
       </div>
       <p id="form-status" role="status" class="mt-5 text-[0.9375rem] text-merk-ink"></p>
       <p class="mt-6 border-t border-line-soft pt-6 text-[0.875rem] leading-relaxed text-ink-faint">
-        Dit formulier opent je eigen e-mailprogramma; je verstuurt de e-mail daar zelf. We gebruiken je gegevens alleen om op je aanvraag te reageren.
+        Je aanvraag komt direct bij ons binnen. We gebruiken je gegevens alleen om op je aanvraag te reageren.
         Zie ons <a href="privacybeleid.html" class="text-ink-soft underline decoration-line underline-offset-4 transition-colors hover:text-merk-ink">privacybeleid</a>.</p>
     </form>
   </div>
@@ -509,11 +511,11 @@ def rest():
 <h2 {H2}>Wie verantwoordelijk is</h2>
 <p {P}>{BEDRIJF}, {ADRES}, KvK {KVK}, is verwerkingsverantwoordelijke voor de verwerking van je persoonsgegevens. Vragen hierover kun je mailen naar <a href="mailto:{MAIL}" {A}>{MAIL}</a> of bellen via <a href="tel:{TEL_LINK}" {A}>{TEL}</a>.</p>
 <h2 {H2}>Welke gegevens we verwerken</h2>
-<p {P}>Het formulier op deze website verstuurt zelf niets en slaat niets op. Het zet je aanvraag klaar in je eigen e-mailprogramma; jij verstuurt die e-mail. Wij ontvangen dan wat je er zelf in zet: je naam, je e-mailadres, de gekozen dienst en je bericht. Bel je ons of mail je ons rechtstreeks, dan verwerken we de gegevens die je ons in dat contact geeft, zoals je telefoonnummer en het adres van het werk.</p>
+<p {P}>Vul je het formulier op deze website in, dan ontvangen we je naam, je e-mailadres, de gekozen dienst en je bericht per e-mail. De website zelf slaat niets op. Bel je ons of mail je ons rechtstreeks, dan verwerken we de gegevens die je ons in dat contact geeft, zoals je telefoonnummer en het adres van het werk.</p>
 <h2 {H2}>Waarom we ze gebruiken en op welke grond</h2>
 <p {P}>We gebruiken je gegevens alleen om op je aanvraag te reageren, je vraag te beantwoorden en je project met je te bespreken. De grondslag daarvoor is de uitvoering van een overeenkomst of de stappen die daaraan voorafgaan op jouw verzoek. Wordt het een opdracht, dan gebruiken we je gegevens ook om die uit te voeren en te factureren; daarvoor geldt daarnaast onze wettelijke administratieplicht. We verkopen je gegevens niet, gebruiken ze niet voor reclame en nemen geen besluiten over je op basis van geautomatiseerde verwerking.</p>
 <h2 {H2}>Wie je gegevens nog meer ziet</h2>
-<p {P}>Je bericht komt binnen in onze e-mail. Die wordt geleverd door Google (Gmail). Verder delen we je gegevens niet met anderen, behalve wanneer dat nodig is om het werk uit te voeren of wanneer de wet ons daartoe verplicht, bijvoorbeeld tegenover onze boekhouder of de Belastingdienst. Onze website staat op een server binnen de Europese Unie en laadt geen onderdelen van andere websites. Voor zover gegevens via onze e-mail buiten de Europese Unie worden verwerkt, gebeurt dat op basis van de standaardbepalingen die de Europese Commissie daarvoor heeft vastgesteld.</p>
+<p {P}>Berichten via het formulier worden doorgestuurd door FormSubmit (formsubmit.co) en komen binnen in onze e-mail. Die wordt geleverd door Google (Gmail). Verder delen we je gegevens niet met anderen, behalve wanneer dat nodig is om het werk uit te voeren of wanneer de wet ons daartoe verplicht, bijvoorbeeld tegenover onze boekhouder of de Belastingdienst. Onze website staat op een server binnen de Europese Unie en laadt geen onderdelen van andere websites. Voor zover gegevens via onze e-mail of FormSubmit buiten de Europese Unie worden verwerkt, gebeurt dat op basis van de standaardbepalingen die de Europese Commissie daarvoor heeft vastgesteld.</p>
 <h2 {H2}>Hoe lang we ze bewaren</h2>
 <p {P}>We bewaren je aanvraag zolang dat nodig is om je te helpen. Wordt het geen opdracht, dan verwijderen we je gegevens uiterlijk een jaar na je aanvraag. Wordt het wel een opdracht, dan bewaren we de administratie zeven jaar, omdat de Belastingdienst dat van ons vraagt.</p>
 <h2 {H2}>Hoe we ze beveiligen</h2>

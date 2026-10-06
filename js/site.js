@@ -71,30 +71,31 @@
     }));
   }
 
-  // Formulier: zet de aanvraag klaar in het eigen e-mailprogramma
+  // Formulier: verstuurt de aanvraag via FormSubmit naar onze mailbox
   const form = $('#project-form');
   if (form) {
     const status = $('#form-status');
-    const tekst = () => {
-      const d = new FormData(form);
-      return ['Projectaanvraag Bouwpartners Eindhoven', '',
-        'Naam: ' + (d.get('naam') || ''), 'E-mail: ' + (d.get('email') || ''),
-        'Dienst: ' + (d.get('dienst') || ''), '', (d.get('bericht') || '')].join('\n');
-    };
-    form.addEventListener('submit', e => {
+    const knop = form.querySelector('button[type="submit"]');
+    form.addEventListener('submit', async e => {
       e.preventDefault();
       if (!form.reportValidity()) return;
-      location.href = 'mailto:bouwpartnerseindhoven@gmail.com?subject='
-        + encodeURIComponent('Mijn project — ' + select.value) + '&body=' + encodeURIComponent(tekst());
-      status.textContent = 'Je aanvraag staat klaar in je e-mailprogramma, nog niet verstuurd. Opent er niets? Kopieer de tekst en mail hem zelf.';
-    });
-    $('#copy').addEventListener('click', async () => {
-      if (!form.reportValidity()) return;
+      const d = new FormData(form);
+      d.set('_replyto', d.get('email') || '');
+      d.set('_subject', 'Projectaanvraag: ' + (d.get('dienst') || '') + ' — ' + (d.get('naam') || ''));
+      knop.disabled = true;
+      status.textContent = 'Bezig met versturen…';
       try {
-        await navigator.clipboard.writeText(tekst());
-        status.textContent = 'Tekst gekopieerd. Plak hem in een e-mail naar bouwpartnerseindhoven@gmail.com.';
+        const r = await fetch(form.action.replace('formsubmit.co/', 'formsubmit.co/ajax/'), {
+          method: 'POST', headers: { Accept: 'application/json' }, body: d
+        });
+        const j = await r.json().catch(() => ({}));
+        if (!r.ok || String(j.success) !== 'true') throw new Error(j.message || r.status);
+        form.reset();
+        status.textContent = 'Bedankt, je aanvraag is verstuurd. We nemen snel contact met je op.';
       } catch (_) {
-        status.textContent = 'Kopiëren lukt hier niet. Selecteer de tekst in het formulier en kopieer hem zelf.';
+        status.textContent = 'Versturen lukte niet. Mail ons via bouwpartnerseindhoven@gmail.com of bel 06 45072792.';
+      } finally {
+        knop.disabled = false;
       }
     });
   }

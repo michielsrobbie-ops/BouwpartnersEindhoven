@@ -11,7 +11,7 @@ exec(open(Path(__file__).resolve().parent / "_data.py", encoding="utf-8").read()
 
 ROOT = Path(__file__).resolve().parent
 OUT = ROOT
-V = "8"
+V = "9"
 
 TEL, TEL_LINK = "06 45072792", "+31645072792"
 MAIL = "bouwpartnerseindhoven@gmail.com"
@@ -506,21 +506,34 @@ def home():
 
     body = f"""<section class="bg-white pb-20 pt-16 lg:pb-28 lg:pt-24">
   <div class="frame">
-    <div class="max-w-4xl">
-      <p class="label">{NAAM} &middot; {VESTIGING}</p>
-      <h1 class="kop-xl mt-6 text-[clamp(2.75rem,6.4vw,5.25rem)]">Vakwerk aan je dak.<br>Rust in je tuin.</h1>
-      <p class="lede mt-8 text-[1.125rem] sm:text-[1.25rem]">
-        Dakwerken, dakisolatie en zolders. Tuinaanleg, tuinrenovatie en bomen. Overkappingen en aanbouwtjes. Eén aanspreekpunt vanuit {VESTIGING}, voor Eindhoven, Helmond en omgeving.</p>
-      <div class="mt-10 flex flex-wrap gap-3">
-        <a href="#contact" class="btn btn-ink">Bespreek je project {PIJL}</a>
-        <a href="#diensten" class="btn btn-stil">Bekijk de diensten</a>
+    <div class="grid items-center gap-12 md:grid-cols-12 lg:gap-16">
+      <div class="md:col-span-7">
+        <p class="label">{NAAM} &middot; {VESTIGING}</p>
+        <h1 class="kop-xl mt-6 text-[clamp(2.75rem,5.4vw,4.75rem)]">Vakwerk aan je dak.<br>Rust in je tuin.</h1>
+        <p class="lede mt-8 text-[1.125rem] sm:text-[1.25rem]">
+          Dakwerken, dakisolatie en zolders. Tuinaanleg, tuinrenovatie en bomen. Overkappingen en aanbouwtjes. Eén aanspreekpunt vanuit {VESTIGING}, voor Eindhoven, Helmond en omgeving.</p>
+        <div class="mt-10 flex flex-wrap gap-3">
+          <a href="#contact" class="btn btn-ink">Bespreek je project {PIJL}</a>
+          <a href="#diensten" class="btn btn-stil">Bekijk de diensten</a>
+        </div>
       </div>
+      <figure class="md:col-span-5">
+        <div class="relative aspect-[4/3] overflow-hidden rounded-2xl bg-paper-warm shadow-lift md:aspect-[4/5]">
+          <img src="/assets/video/hero-poster.webp" alt="Schuin dak in opbouw met een vakman op de steiger, eigen werk van {NAAM}" width="864" height="1080" fetchpriority="high" class="absolute inset-0 h-full w-full object-cover">
+          <!-- Alleen op desktop en zonder 'beweging beperken' laadt site.js de video -->
+          <video id="hero-video" data-src="/assets/video/hero-loop.mp4" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"
+            class="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-700"></video>
+          <button type="button" id="hero-video-knop" hidden aria-pressed="false"
+            class="absolute bottom-4 right-4 rounded-xl bg-white/85 px-4 py-2 text-[0.875rem] font-medium text-ink shadow-lift backdrop-blur transition-colors hover:bg-white">Pauzeer video</button>
+        </div>
+        <figcaption class="label mt-4">Eigen werk: dak, zolder, overkapping en tuin</figcaption>
+      </figure>
     </div>
 
     <div class="mt-20 grid gap-12 md:grid-cols-2 lg:mt-24 lg:gap-16">
       {pijler("dak", "merk", "dakwerk", "Alles boven<br>je hoofd.",
               "Van een dak dat aandacht nodig heeft tot een zolder waar je echt iets mee kunt. We beginnen bij het dak en werken naar binnen.",
-              ["dakwerken", "dakisolatie", "zolder"], True)}
+              ["dakwerken", "dakisolatie", "zolder"], False)}
       {pijler("tuin", "tuin", "tuin-1", "Buiten wordt<br>een plek om<br>te blijven.",
               "Een nieuwe tuin, een bestaande tuin die toe is aan vernieuwing, of een boom die weg moet. Voor grotere tuinprojecten komen we ook buiten de regio.",
               ["tuinaanleg", "tuinrenovatie", "bomen-verwijderen"], False)}
@@ -825,6 +838,7 @@ def rest():
              "headers": [{"key": "X-Robots-Tag", "value": "noindex"}]},
             {"source": "/assets/fonts/(.*)", "headers": [{"key": "Cache-Control", "value": "public, max-age=31536000, immutable"}]},
             {"source": "/assets/images/(.*)", "headers": [{"key": "Cache-Control", "value": "public, max-age=604800"}]},
+            {"source": "/assets/video/(.*)", "headers": [{"key": "Cache-Control", "value": "public, max-age=604800"}]},
         ],
     }
     (OUT / "vercel.json").write_text(json.dumps(vercel, indent=2) + "\n")

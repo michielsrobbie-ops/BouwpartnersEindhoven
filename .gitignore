@@ -4,3 +4,7 @@ node_modules/
 _backups/
 _oud/
 __pycache__/
+videos/*/snapshots/
+videos/*/renders/
+videos/*/.hyperframes/
+videos/*/.thumbnails/

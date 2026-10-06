@@ -25,6 +25,10 @@ Hoog na een wijziging in CSS of JS het nummer `V` in build.py op, anders zien be
 - `vercel.json` zet `X-Robots-Tag: noindex` op alle *.vercel.app-adressen. Previews krijgen dat ook al automatisch van Vercel. Alleen bouwpartnerseindhoven.nl wordt geïndexeerd.
 - Interne links zijn schone URL's (`/dakwerken`), canonicals wijzen naar https://bouwpartnerseindhoven.nl.
 
+## Hero-video
+- Bron: `videos/hero-loop/` (HyperFrames-project, eigen foto's uit de originele projectmappen). Opnieuw maken: `cd videos/hero-loop && npx hyperframes render -o renders/hero-loop-master.mp4`, daarna met ffmpeg naar `assets/video/hero-loop.mp4` (864x1080, H.264, crf 27, zonder geluid, `+faststart`).
+- `assets/video/hero-poster.webp` is het eerste frame. Mobiel en "beweging beperken" krijgen alleen de poster; `site.js` laadt de video pas op schermen vanaf 768px. Er is een pauzeknop.
+
 ## Bewuste keuzes
 - Geen Google Fonts via CDN en geen Tailwind CDN. Alles staat lokaal, zodat er geen IP-adressen van bezoekers naar Google gaan en het cookiebeleid blijft kloppen.
 - Bij foto's staat geen plaats of datum. Foto's die tijdens het werk zijn gemaakt, staan als "tijdens het werk" vermeld.

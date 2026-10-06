@@ -50,6 +50,22 @@
     if (bewaard && select) { kies(bewaard); sessionStorage.removeItem('bpe-dienst'); }
   } catch (_) {}
 
+  // Hero-video: alleen op grotere schermen en als de bezoeker beweging toestaat.
+  // Daarbuiten blijft de poster staan en wordt de video niet gedownload.
+  const hv = $('#hero-video'), hvKnop = $('#hero-video-knop');
+  if (hv && matchMedia('(min-width: 768px)').matches && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    hv.addEventListener('playing', () => hv.classList.remove('opacity-0'), { once: true });
+    hv.src = hv.dataset.src;
+    hv.play().catch(() => {});
+    hvKnop.hidden = false;
+    hvKnop.addEventListener('click', () => {
+      const pauze = !hv.paused;
+      if (pauze) hv.pause(); else hv.play().catch(() => {});
+      hvKnop.textContent = pauze ? 'Speel video af' : 'Pauzeer video';
+      hvKnop.setAttribute('aria-pressed', String(pauze));
+    });
+  }
+
   // Hero: wisselen tussen de drie disciplines
   const data = $('#hero-data');
   if (data) {

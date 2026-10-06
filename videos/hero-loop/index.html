@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1080, height=1350">
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 1080px;
+        height: 1350px;
+        overflow: hidden;
+        background: #f5f5f4;
+      }
+      #root {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: #f5f5f4;
+      }
+      /* Elk shot vult het hele beeld; latere shots liggen bovenop eerdere */
+      .shot {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+      }
+      .kb {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        will-change: transform, opacity;
+      }
+      .kb img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      #s-dak img,
+      #s-slot img { object-position: 50% 45%; }
+      #s-zolder img { object-position: 50% 55%; }
+      #s-overkapping img { object-position: 50% 40%; }
+      #s-tuin img { object-position: 50% 55%; }
+      #s-gazon img { object-position: 50% 50%; }
+    </style>
+  </head>
+  <body>
+    <div data-hf-id="hf-2yz7" id="root" data-composition-id="main" data-start="0" data-duration="15" data-width="1080" data-height="1350">
+      <!-- Dak, zolder, overkapping, tuin, gazon: elk 3,9 s, met 0,9 s overvloei -->
+      <section data-hf-id="hf-ktlw" id="s-dak" class="clip shot" data-start="0" data-duration="3.9" data-track-index="0">
+        <div data-hf-id="hf-cr4i" class="kb" data-layout-allow-overflow=""><img data-hf-id="hf-p78h" src="assets/01-dak.jpg" alt="Schuin dak in opbouw met vakman op de steiger"></div>
+      </section>
+      <section data-hf-id="hf-a4vc" id="s-zolder" class="clip shot" data-start="3" data-duration="3.9" data-track-index="1">
+        <div data-hf-id="hf-a4ra" class="kb" data-layout-allow-overflow=""><img data-hf-id="hf-0pae" src="assets/02-zolder.jpg" alt="Zolder met beplating en dakkapel tijdens de afwerking"></div>
+      </section>
+      <section data-hf-id="hf-mi92" id="s-overkapping" class="clip shot" data-start="6" data-duration="3.9" data-track-index="2">
+        <div data-hf-id="hf-aj2b" class="kb" data-layout-allow-overflow=""><img data-hf-id="hf-sy3y" src="assets/03-overkapping.jpg" alt="Houten overkapping met balken en plafond van houten delen"></div>
+      </section>
+      <section data-hf-id="hf-b27k" id="s-tuin" class="clip shot" data-start="9" data-duration="3.9" data-track-index="3">
+        <div data-hf-id="hf-axdc" class="kb" data-layout-allow-overflow=""><img data-hf-id="hf-we1t" src="assets/04-bestrating.jpg" alt="Tuin in aanleg: tegels worden gelegd tussen stroken grind"></div>
+      </section>
+      <section data-hf-id="hf-whgn" id="s-gazon" class="clip shot" data-start="12" data-duration="3" data-track-index="4">
+        <div data-hf-id="hf-8585" class="kb" data-layout-allow-overflow=""><img data-hf-id="hf-knyp" src="assets/05-tegelpad.jpg" alt="Zijpad van grote tegels met een afvoergoot langs de gevel"></div>
+      </section>
+      <!-- Het eerste shot komt terug en eindigt exact in de beginstand: naadloze loop -->
+      <section data-hf-id="hf-bs18" id="s-slot" class="clip shot" data-start="14.1" data-duration="0.9" data-track-index="5">
+        <div data-hf-id="hf-8jj6" class="kb" data-layout-allow-overflow=""><img data-hf-id="hf-9e4w" src="assets/01-dak-slot.jpg" alt=""></div>
+      </section>
+    </div>
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      const FADE = 0.9;
+
+      // Ken Burns met constante snelheid (ease none), zodat de loop-naad niet hapert
+      const kb = (sel, start, dur, from, to) =>
+        tl.fromTo(`${sel} .kb`, from, { ...to, duration: dur, ease: "none" }, start);
+      const fadeIn = (sel, start) =>
+        tl.fromTo(`${sel} .kb`, { opacity: 0 }, { opacity: 1, duration: FADE, ease: "sine.inOut" }, start);
+
+      // Dak: inzoomen, licht naar links. Beginstand = eindstand van het slot-shot.
+      kb("#s-dak", 0, 3.9, { scale: 1.02, xPercent: 0, opacity: 1 }, { scale: 1.09, xPercent: -1.5 });
+      // Zolder: uitzoomen, licht omhoog
+      kb("#s-zolder", 3, 3.9, { scale: 1.09, yPercent: 1.2 }, { scale: 1.02, yPercent: 0 });
+      fadeIn("#s-zolder", 3);
+      // Overkapping: inzoomen, kantelt naar het plafond
+      kb("#s-overkapping", 6, 3.9, { scale: 1.02, yPercent: -1.2 }, { scale: 1.09, yPercent: 0.6 });
+      fadeIn("#s-overkapping", 6);
+      // Tuin: uitzoomen, pan naar rechts
+      kb("#s-tuin", 9, 3.9, { scale: 1.09, xPercent: -1.5 }, { scale: 1.02, xPercent: 1 });
+      fadeIn("#s-tuin", 9);
+      // Gazon: inzoomen, pan naar links
+      kb("#s-gazon", 12, 3, { scale: 1.02, xPercent: 0.8 }, { scale: 1.075, xPercent: -0.6 });
+      fadeIn("#s-gazon", 12);
+      // Slot: zelfde snelheid als het dak-shot, eindigt op scale 1.02 / xPercent 0
+      const rate = 0.07 / 3.9;
+      kb("#s-slot", 14.1, FADE, { scale: 1.02 - rate * FADE, xPercent: (1.5 / 3.9) * FADE }, { scale: 1.02, xPercent: 0 });
+      fadeIn("#s-slot", 14.1);
+
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

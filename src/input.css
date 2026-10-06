@@ -40,6 +40,7 @@
   .btn-ink { @apply bg-ink text-white shadow-lift hover:bg-black hover:shadow-lift-lg; }
   .btn-stil { @apply border border-line bg-white text-ink hover:border-ink/25 hover:shadow-lift; }
 
+  .lnk { @apply text-ink underline decoration-line underline-offset-4 transition-colors hover:text-merk-ink; }
   .link-pijl { @apply inline-flex items-center gap-1.5 font-medium transition-colors; }
   .link-pijl svg { @apply transition-transform duration-200; }
   .link-pijl:hover svg { @apply translate-x-1; }

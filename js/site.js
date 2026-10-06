@@ -21,9 +21,21 @@
 
   // Dienst alvast invullen in het formulier; de bezoeker kan altijd wisselen
   const select = $('#dienst');
+  // Oppervlakte alleen vragen waar het helpt: dak bij dakwerk, tuin bij tuinwerk
+  const toonOppervlakte = () => {
+    if (!select) return;
+    const soort = (select.selectedOptions[0] || {}).dataset?.opp || '';
+    $$('[data-opp-veld]').forEach(v => {
+      const aan = v.dataset.oppVeld === soort;
+      v.hidden = !aan;
+      $('select', v).disabled = !aan;
+    });
+  };
+  if (select) { select.addEventListener('change', toonOppervlakte); toonOppervlakte(); }
   const kies = naam => {
     if (!select || !naam) return;
     $$('option', select).forEach(o => { if (o.value === naam) select.value = naam; });
+    toonOppervlakte();
   };
   document.addEventListener('click', e => {
     const a = e.target.closest('[data-keuze]');
@@ -81,7 +93,7 @@
       if (!form.reportValidity()) return;
       const d = new FormData(form);
       d.set('_replyto', d.get('email') || '');
-      d.set('_subject', 'Projectaanvraag: ' + (d.get('dienst') || '') + ' — ' + (d.get('naam') || ''));
+      d.set('_subject', 'Projectaanvraag: ' + (d.get('dienst') || '') + ' — ' + (d.get('naam') || '') + ' (' + (d.get('postcode') || '') + ')');
       knop.disabled = true;
       status.textContent = 'Bezig met versturen…';
       try {

@@ -1,0 +1,12 @@
+# Alleen de website zelf publiceren. Bronbestanden, documentatie,
+# back-ups en prototypes blijven lokaal en in git.
+/*
+!*.html
+!css
+!js
+!assets
+!robots.txt
+!sitemap.xml
+!vercel.json
+assets/images/hero-*.png
+assets/images/maten.json

@@ -92,8 +92,11 @@
         if (!r.ok || String(j.success) !== 'true') throw new Error(j.message || r.status);
         form.reset();
         status.textContent = 'Bedankt, je aanvraag is verstuurd. We nemen snel contact met je op.';
-      } catch (_) {
-        status.textContent = 'Versturen lukte niet. Mail ons via bouwpartnerseindhoven@gmail.com of bel 06 45072792.';
+      } catch (err) {
+        console.warn('Formulier niet verstuurd:', err.message);
+        status.textContent = /activat/i.test(err.message)
+          ? 'Het formulier wordt nog geactiveerd. Mail ons voorlopig via bouwpartnerseindhoven@gmail.com of bel 06 45072792.'
+          : 'Versturen lukte niet. Mail ons via bouwpartnerseindhoven@gmail.com of bel 06 45072792.';
       } finally {
         knop.disabled = false;
       }

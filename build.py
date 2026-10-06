@@ -10,7 +10,7 @@ exec(open(Path(__file__).resolve().parent / "_data.py", encoding="utf-8").read()
 
 ROOT = Path(__file__).resolve().parent
 OUT = ROOT / "site"
-V = "6"
+V = "7"
 
 TEL, TEL_LINK = "06 45072792", "+31645072792"
 MAIL = "bouwpartnerseindhoven@gmail.com"

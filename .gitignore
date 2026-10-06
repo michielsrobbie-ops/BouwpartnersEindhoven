@@ -1,0 +1,6 @@
+.DS_Store
+node_modules/
+.vercel
+_backups/
+_oud/
+__pycache__/

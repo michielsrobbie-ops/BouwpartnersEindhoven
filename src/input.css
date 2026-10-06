@@ -1,0 +1,51 @@
+/* Bouwpartners Eindhoven — lettertypen staan lokaal, er wordt niets van buiten geladen. */
+@font-face { font-family: "Plus Jakarta Sans"; font-style: normal; font-weight: 600; font-display: swap; src: url("../assets/fonts/jakarta-600.woff2") format("woff2"); }
+@font-face { font-family: "Plus Jakarta Sans"; font-style: normal; font-weight: 700; font-display: swap; src: url("../assets/fonts/jakarta-700.woff2") format("woff2"); }
+@font-face { font-family: "Outfit"; font-style: normal; font-weight: 400; font-display: swap; src: url("../assets/fonts/outfit-400.woff2") format("woff2"); }
+@font-face { font-family: "Outfit"; font-style: normal; font-weight: 500; font-display: swap; src: url("../assets/fonts/outfit-500.woff2") format("woff2"); }
+@font-face { font-family: "Space Grotesk"; font-style: normal; font-weight: 500; font-display: swap; src: url("../assets/fonts/grotesk-500.woff2") format("woff2"); }
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { scroll-behavior: smooth; scroll-padding-top: 6rem; -webkit-text-size-adjust: 100%; }
+  body { @apply bg-paper font-sans text-[17px] leading-relaxed text-ink antialiased; }
+  ::selection { @apply bg-merk-soft text-merk-ink; }
+  :focus-visible { @apply outline-2 outline-offset-4 outline-merk; }
+  img { @apply block h-auto max-w-full; }
+}
+
+@layer components {
+  .frame { @apply mx-auto w-full max-w-frame px-6 sm:px-8 lg:px-10; }
+
+  /* Koppen: elegant, strak gespatieerd */
+  .kop-xl { @apply font-display font-bold leading-[1.04] tracking-[-0.035em] text-balance; }
+  .kop-l { @apply font-display text-[clamp(2.25rem,4.6vw,4rem)] font-bold leading-[1.06] tracking-[-0.032em] text-balance; }
+  .kop-m { @apply font-display text-[clamp(1.75rem,3.2vw,2.75rem)] font-bold leading-[1.1] tracking-[-0.028em] text-balance; }
+  .kop-s { @apply font-display text-[1.375rem] font-semibold leading-snug tracking-[-0.02em]; }
+
+  /* Label: architectonisch, licht gespatieerd */
+  .label { @apply font-label text-[0.7rem] font-medium uppercase tracking-label text-ink-faint; }
+  .label-merk { @apply font-label text-[0.7rem] font-medium uppercase tracking-label text-merk-ink; }
+
+  .lede { @apply max-w-reading text-[1.0625rem] leading-[1.75] text-ink-soft sm:text-[1.125rem]; }
+
+  /* Knoppen: zacht afgerond, rustige schaduw */
+  .btn { @apply inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3.5 font-sans text-[0.9375rem] font-medium transition-all duration-200; }
+  .btn-merk { @apply bg-merk text-ink shadow-lift hover:bg-merk-hover hover:shadow-lift-lg; }
+  .btn-tuin { @apply bg-tuin text-white shadow-lift hover:bg-tuin-deep hover:shadow-lift-lg; }
+  .label-tuin { @apply font-label text-[0.7rem] font-medium uppercase tracking-label text-tuin; }
+  .btn-ink { @apply bg-ink text-white shadow-lift hover:bg-black hover:shadow-lift-lg; }
+  .btn-stil { @apply border border-line bg-white text-ink hover:border-ink/25 hover:shadow-lift; }
+
+  .link-pijl { @apply inline-flex items-center gap-1.5 font-medium transition-colors; }
+  .link-pijl svg { @apply transition-transform duration-200; }
+  .link-pijl:hover svg { @apply translate-x-1; }
+
+  .kaart { @apply rounded-2xl border border-line bg-white transition-shadow duration-300; }
+  .kaart-hover { @apply hover:shadow-lift-lg; }
+  .beeld { @apply w-full rounded-2xl object-cover; }
+  .veld { @apply w-full rounded-xl border border-line bg-white px-4 py-3 text-[1rem] text-ink placeholder:text-ink-faint focus:border-merk focus:outline-none focus:ring-4 focus:ring-merk/15; }
+}

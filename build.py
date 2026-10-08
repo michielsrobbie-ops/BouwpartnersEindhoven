@@ -204,7 +204,7 @@ def voet():
   <div class="border-t border-line-soft">
     <div class="frame flex flex-wrap items-center justify-between gap-x-8 gap-y-3 py-8 text-[0.8125rem] text-ink-faint">
       <span>{BEDRIJF} &middot; {ADRES} &middot; KvK {KVK}</span>
-      <span>&copy; 2026 {NAAM}</span>
+      <span>&copy; 2026 {NAAM} &middot; Website door <a href="https://maxxmarketing.eu" target="_blank" rel="noopener" class="underline underline-offset-4 hover:text-ink">maxxmarketing.eu</a></span>
     </div>
   </div>
 </footer>
